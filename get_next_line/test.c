@@ -80,8 +80,14 @@ char    *extract_line(char **stash)
     char *line = malloc(len + 1);
     if (!line) 
         return NULL;
-    for (size_t i = 0; i < len; i++)
+    int i = 0;
+    while (i < len)
+    {
         line[i] = (*stash)[i];
+        i ++;
+    }
+    // for (size_t i = 0; i < len; i++)
+    //     line[i] = (*stash)[i];
     line[len] = '\0';
 
     // Reste après la ligne
@@ -116,10 +122,13 @@ int main(void)
     if (fd == -1) return 1;
 
     char *line;
-    while ((line = ft_get_next_line(fd)))
+    int i = 0;
+    while (i < 3)
     {
+        line = ft_get_next_line(fd);
         printf("%s", line);
         free(line);
+        i ++;
     }
     close(fd);
     return 0;
