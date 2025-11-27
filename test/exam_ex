@@ -1,0 +1,78 @@
+		** EX 1 : **
+strcpy
+char	*strcpy(char *s1, char *s2)
+	copy s2 into s1 ('\0' included)
+
+ulstr
+int	main(int argc, char *argv[])
+	if argc == 2, display argv[1] swapping lowercase into uppercase and vice-versa, \n at end
+
+rot 13
+int	main(int argc, char *argv[])
+	display string in first argument applying a code caesar of 13, \n at end
+
+swap
+void	ft_swap(int *a, int *b)
+	swap int values between pointers a and b.
+
+putstr
+int	main(int argc, char *argv[])
+	if argc == 1, display string. can vary to only printing first or last argument if argc > 1.
+
+search and replace
+if argc == 4, display argv[1] replacing all occurences of argv[2] by argv[3], \n at end
+
+
+
+		** EX 2 : **
+
+union
+int	main(int argc, char *argv[])
+	if argc == 3, display all characters appearing in argv[1] and argv[2] only once and in the order they appear, \n at end
+
+strcomp module
+int	strcmp(char *s1, char *s2)
+	compare strings until a character differs, and return the difference
+between the two
+
+atoi
+int	ft_atoi(char *s)
+	return an int value parsed from the source string, behavior based on strtol as described in manual.
+
+print s1 from s2
+int	main(int argc, char *argv[])
+	if argc == 3, print s1 if every of its character is found in order in s2, n\ at end.
+
+
+
+		** EX 3 : **
+
+lstsize
+int	ft_lstsize(t_list *list)
+	return size of chained list, include .h file.
+
+range
+int	*ft_range(int 1, int 2)
+	return array containing every value between int 1 and int 2.
+
+
+
+		** EX 4 : **
+
+list_remove_if
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void *))
+	ft_list_remove_if: remove elements from the list that are equal with data_ref. cmp returns 0 if both arguments are equal. free the element but NOT its data. DO NOT include .h file.
+
+lstiteri
+void	ft_lstiter(t_list *list_begin, void (*f)(void *))
+	apply function pointed to to every element of the list.
+
+lstsort
+void	ft_lstsort(t_list **list, int (*cmp)(void *, void *))
+	sort a list based on the return value of the cmp function pointed to. DO NOT include .h file.
+
+lstany
+
+split ' ' '\t' '\n'
+char	**ft_split(char *s)
+	split source string into strings that are separated by the start or end of the source or ' ', '\t' or '\n', return a malloc'ed array of the resulted string.
