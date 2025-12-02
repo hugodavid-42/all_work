@@ -78,10 +78,9 @@ char	**ft_split(char *s)
 	{
 		while(separator(s[start]))
 			start ++;
-		if(!separator(s[start]))
-		{
-			dst[word] = extract_line(s, start);
-		}
+		dst[word] = extract_line(s, start);
+		if(!dst[word])
+			free(dst);
 		word ++;
 		start += ft_strlen(s, start);
 	}
@@ -92,7 +91,7 @@ char	**ft_split(char *s)
 int main(void)
 {
 	char *s = "Hello World, \n42\t thats all";
-	printf("%d\n", ft_wordCount(s));
+	//printf("%d\n", ft_wordCount(s));
 
 
 	char **dst= ft_split(s);
@@ -100,7 +99,6 @@ int main(void)
 	{
 		char *line = *dst;
 		printf("%s\n", line);
-		free(dst);
 		dst ++;
 	}
 	return 0;

@@ -1,8 +1,13 @@
 /*lstsize return size of chained list, include .h file.*/
 
-#include "pointh.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+} 					t_list;
 
 int	ft_lstsize(t_list *list)
 {
@@ -51,29 +56,54 @@ void add(void *a)
 	printf("%d\n", *(int *)a *10);
 }
 
+// void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void *))
+// {
+//     t_list *current = *begin_list;
+//     t_list *prev = NULL;
+
+//     while (current)
+//     {
+//         t_list *next_node = current->next;
+
+//         if (cmp(data_ref, current->content) == 0)
+//         {
+//             if (prev)
+//                 prev->next = next_node;
+//             else
+//                 *begin_list = next_node;
+//             free(current);
+//         }
+//         else
+//         {
+//             prev = current;
+//         }
+//         current = next_node;
+//     }
+// }
+
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void *))
 {
-    t_list *current = *begin_list;
-    t_list *prev = NULL;
+	t_list *current_node = *begin_list;
+	t_list *next_node = current_node->next;
+	t_list *prev_node = NULL;
 
-    while (current)
-    {
-        t_list *next_node = current->next;
-
-        if (cmp(data_ref, current->content) == 0)
-        {
-            if (prev)
-                prev->next = next_node;
-            else
-                *begin_list = next_node;
-            free(current);
-        }
-        else
-        {
-            prev = current;
-        }
-        current = next_node;
-    }
+	while(current_node)
+	{
+		next_node = current_node->next;
+		if(!cmp(data_ref, current_node->content))
+		{
+			if(prev_node)
+				prev_node->next = next_node;
+			else
+				*begin_list = next_node;
+			free(current_node);
+		}
+		else
+		{
+			prev_node = current_node;
+		}
+		current_node = next_node;
+	}
 }
 
 /*lstiteri apply function pointed to to every element of the list.*/
@@ -92,26 +122,53 @@ void	ft_lstiter(t_list *list_begin, void (*f)(void *))
 
 /*lstsort sort a list based on the return value of the cmp function pointed to. DO NOT include .h file.*/
 
-void	ft_lstsort(t_list **list, int (*cmp)(void *, void *))
-{
-	t_list *current = *list;
-	t_list *next_node;
-	t_list *dst = NULL;
-	void *tmp;
+// void	ft_lstsort(t_list **list, int (*cmp)(void *, void *))
+// {
+// 	t_list *current = *list;
+// 	t_list *next_node;
+// 	t_list *dst = NULL;
+// 	void *tmp;
 
-	while(current->next != dst)
-	{
-		next_node = current->next;
-		if(cmp(current->content, next_node->content) > 0)
-		{
-			tmp = current->content;
-			current->content = next_node->content;
-			next_node->content = tmp;
-		}
-		current = current->next;
-	}
-	dst = current;
-}
+// 	while(current->next != dst)
+// 	{
+// 		next_node = current->next;
+// 		if(cmp(current->content, next_node->content) > 0)
+// 		{
+// 			tmp = current->content;
+// 			current->content = next_node->content;
+// 			next_node->content = tmp;
+// 		}
+// 		current = current->next;
+// 	}
+// 	dst = current;
+// }
+
+// void ft_lstsort(t_list **list, int (*cmp)(void *, void *))
+// {
+//     if (!list || !*list)
+//         return;
+
+//     t_list *current = *list;
+//     t_list *next_node = (*list)->next;
+// 	void *temp;
+
+//     while (next_node)
+//     {
+// 		while(current->next != NULL)
+// 		{
+// 			if (cmp(current->content, next_node->content) > 0)
+// 			{
+// 				temp = current->content;
+// 				current->content = next_node->content;
+// 				next_node->content = temp;
+// 			}
+// 			current = current->next;
+// 		}
+// 		current = next_node;
+// 		next_node = (*list)->next;
+//     }
+
+// }
 
 // void ft_lstsort(t_list **list, int (*cmp)(void *, void *))
 // {
@@ -121,21 +178,58 @@ void	ft_lstsort(t_list **list, int (*cmp)(void *, void *))
 //     t_list *current = *list;
 //     t_list *next_node = NULL;
 //     t_list *last = NULL;
-// 	void *temp;
 
-//     while (current->next != last)
-//     {
+//     while (current && current->next) 
+// 	{
 //         next_node = current->next;
-//         if (cmp(current->content, next_node->content) > 0)
-//         {
-//             temp = current->content;
-//             current->content = next_node->content;
-//             next_node->content = temp;
+//         while (next_node && next_node != last) 
+// 		{
+//             if (cmp(current->content, next_node->content) > 0) 
+// 			{
+//                 void *temp = current->content;
+//                 current->content = next_node->content;
+//                 next_node->content = temp;
+//             }
+//             current = current->next;
+//             next_node = next_node->next;
 //         }
-//         current = current->next;
+//         last = next_node;
+//         current = *list;
 //     }
-//     last = current;
 // }
+
+void ft_lstsort(t_list **list, int (*cmp)(void *, void *))
+{
+    if (!list || !*list)
+        return;
+
+    t_list *current;
+    t_list *next_node;
+    t_list *last = NULL;
+    int swapped;
+
+    swapped = 1;
+    while (swapped) 
+	{
+        swapped = 0;
+        current = *list;
+        next_node = current->next;
+
+        while (next_node != last) 
+		{
+            if (cmp(current->content, next_node->content) > 0) 
+			{
+                void *temp = current->content;
+                current->content = next_node->content;
+                next_node->content = temp;
+                swapped = 1;
+            }
+            current = next_node;
+            next_node = next_node->next;
+        }
+        last = current; // Met à jour la fin de la portion non triée
+    }
+}
 
 int main(void)
 {
@@ -143,16 +237,24 @@ int main(void)
 	int data2= 20;
 	int data3= 30;
 	int data4= 40;
+	//int data5= 50;
+	//int data6= 60;
+	int data7= 70;
+	//int data8= 80;
 	t_list* head = ft_lstnew(&data1);
     head->next = ft_lstnew(&data3);
     head->next->next = ft_lstnew(&data2);
     head->next->next->next = ft_lstnew(&data4);
+	head->next->next->next->next = ft_lstnew(&data2);
+	head->next->next->next->next->next = ft_lstnew(&data3);
+	head->next->next->next->next->next->next = ft_lstnew(&data7);
+	head->next->next->next->next->next->next->next = ft_lstnew(&data1);
 
 	printf("%d\n", ft_lstsize(head));
     printList(head);
 
-	// ft_list_remove_if(&head, &data3, ft_intcmp);
-	// printList(head);
+	ft_list_remove_if(&head, &data3, ft_intcmp);
+	printList(head);
 
 	ft_lstiter(head, add);
 

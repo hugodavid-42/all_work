@@ -7,49 +7,37 @@ void	ft_putchar(char c)
 
 void	ft_union(char *s1, char *s2)
 {
-	char tmp;
 	int flag[256] = {0};
-	int i;
-
+	
 	while(*s1)
 	{
-		tmp = *s1;
-		i = 1;
-		while (s1[i] != '\0')
+		if(flag[(int)*s1] == 0)
 		{
-			if (tmp != s1[i] && flag[(int)tmp] == 0)
-			{
-				ft_putchar(tmp);
-				flag[(int)tmp] = 1;
-			}
-			i ++;
+			ft_putchar(*s1);
+			flag[(int)*s1] = 1;
 		}
-		s1 ++;
+		s1++;
 	}
 	while(*s2)
 	{
-		tmp = *s2;
-		i = 1;
-		while (s2[i] != '\0')
+		if(flag[(int)*s2] == 0)
 		{
-			if (tmp != s2[i] && flag[(int)tmp] == 0)
-			{
-				ft_putchar(tmp);
-				flag[(int)tmp] = 1;
-			}
-			i ++;
+			ft_putchar(*s2);
+			flag[(int)*s2] = 1;
 		}
-		s2 ++;
+		s2++;
 	}
 }
 
 
-int main(void)
+int main(int argc, char *argv[])
 {
-	char *s1 = "kabcdefg";
-	char *s2 = "abcdefla";
+	if (argc != 3)
+	{
+		write(1, "2 strings allowed", 17);
+	}
 	
-	ft_union(s1, s2);
+	ft_union(argv[1], argv[2]);
 
 	return 0;
 }
