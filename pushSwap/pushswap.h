@@ -26,6 +26,9 @@ typedef struct stack
 /* Sorting algorithms */
 void	selectionSort(Stack **stackA, Stack **stackB, int len);
 void	bubbleSort(Stack **stackA, Stack **stackB, int len);
+void	sort3Number(Stack **stackA);
+void    sort5Number(Stack **stackA, Stack **stackB);
+void	insertionSort(Stack **stackA, Stack **stackB);
 
 /* Utils */
 
