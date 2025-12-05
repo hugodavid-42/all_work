@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:48:41 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/04 16:40:09 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/05 16:59:58 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,54 @@ int	ft_lstlen(Stack *head)
 	return (count);
 }
 
+void push(Stack **head, int i)
+{
+	Stack *newNode = createNode(i);
+	newNode->next = *head;
+	*head = newNode;
+}
+
+/*=========== Utils algo ===============*/
+
+int	findMax(Stack *stackA)
+{
+	int max = stackA->data;
+	while(stackA)
+	{
+		if(stackA->data > max)
+			max = stackA->data;
+		stackA = stackA->next;
+	}
+	return max;
+}
+
+int	findMin(Stack *stackA)
+{
+	int min = stackA->data;
+	while(stackA)
+	{
+		if(stackA->data < min)
+			min = stackA->data;
+		stackA = stackA->next;
+	}
+	return min;
+}
+
+int		locateMin(Stack *stackA)
+{
+	int min = findMin(stackA);
+	int i = 0;
+	while (stackA)
+	{
+		if (stackA->data == min)
+			return i;
+		i ++;
+		stackA = stackA->next;
+	}
+	return i;
+}
+
+
 /*================== Find Last ==================*/
 
 
@@ -108,7 +156,7 @@ Stack	*removeFirstNode(Stack *head)
 
 /*================== SA && SB ==================*/
 
-void	ft_swapA(Stack **head)
+int	ft_swapA(Stack **head)
 {
 	Stack	*next = (*head)->next;
 	int temp;
@@ -117,9 +165,10 @@ void	ft_swapA(Stack **head)
 	(*head)->data = next->data;
 	next->data = temp;
 	printf("sa\n");
+	return 1;
 }
 
-void	ft_swapB(Stack **head)
+int	ft_swapB(Stack **head)
 {
 	Stack	*next = (*head)->next;
 	int temp;
@@ -128,71 +177,102 @@ void	ft_swapB(Stack **head)
 	(*head)->data = next->data;
 	next->data = temp;
 	printf("sb\n");
+	return 1;
 }
 
 /*================== SS ==================*/
 
-void	ft_swap2Stack(Stack **stackA, Stack **stackB)
+int	ft_swap2Stack(Stack **stackA, Stack **stackB)
 {
-	ft_swapA(stackA);
-	ft_swapB(stackB);
+	// stackA
+	Stack	*next = (*stackA)->next;
+	int temp;
+	temp = (*stackA)->data;
+	(*stackA)->data = next->data;
+	next->data = temp;
+
+	//stackB
+	next = (*stackB)->next;
+	temp = (*stackB)->data;
+	(*stackB)->data = next->data;
+	next->data = temp;
+
+	printf("ss\n");
+	return 1;
 }
 
 /*================== PA && PB ==================*/
 
-void ft_pushAndPopA(Stack **stackA, Stack **stackB) 
+int ft_pushAndPopA(Stack **stackA, Stack **stackB) 
 {
 	Stack *newNode = createNode((*stackB)->data);
 	newNode->next = *stackA;
 	*stackA = newNode;
 	*stackB = removeFirstNode(*stackB);
 	printf("pa\n");
+	return 1;
 }
 
-void ft_pushAndPopB(Stack **stackA, Stack **stackB) 
+int ft_pushAndPopB(Stack **stackA, Stack **stackB) 
 {
 	Stack *newNode = createNode((*stackB)->data);
 	newNode->next = *stackA;
 	*stackA = newNode;
 	*stackB = removeFirstNode(*stackB);
 	printf("pb\n");
+	return 1;
 }
 
 /*================== Rotate ==================*/
 
-void	ft_rotateA(Stack **head)
+int	ft_rotateA(Stack **head)
 {
 	if(!(*head)->next)
-		return ;
+		return 0;
 	Stack *last = ft_lstlast(*head);
 	int temp = (*head)->data;
 
 	*head = removeFirstNode(*head);
 	last->next = createNode(temp);
 	printf("ra\n");
+	return 1;
 }
 
-void	ft_rotateB(Stack **head)
+int	ft_rotateB(Stack **head)
 {
 	if(!(*head)->next)
-		return ;
+		return 0;
 	Stack *last = ft_lstlast(*head);
 	int temp = (*head)->data;
 
 	*head = removeFirstNode(*head);
 	last->next = createNode(temp);
 	printf("rb\n");
+	return 1;
 }
 
-void	ft_rotate2Stack(Stack **stackA, Stack **stackB)
+int	ft_rotate2Stack(Stack **stackA, Stack **stackB)
 {
-	ft_rotateA(stackA);
-	ft_rotateB(stackB);
+	// stackA
+	if(!(*stackA)->next || !(*stackB)->next)
+		return 0;
+	Stack *last = ft_lstlast(*stackA);
+	int temp = (*stackA)->data;
+	*stackA = removeFirstNode(*stackA);
+	last->next = createNode(temp);
+
+	// stackB
+	last = ft_lstlast(*stackB);
+	temp = (*stackB)->data;
+	*stackB = removeFirstNode(*stackB);
+	last->next = createNode(temp);
+	printf("rr\n");
+	return 1;
 }
 
 /*============= Reverse rotate ===============*/
 
-void	ft_reverseRotateA(Stack **head)
+int	ft_reverseRotateA(Stack **head)
 {
 	Stack *newNode;
 	int temp = ft_lstlast(*head)->data;
@@ -201,9 +281,10 @@ void	ft_reverseRotateA(Stack **head)
 	removeLastNode(*head);
 	*head = newNode;
 	printf("rra\n");
+	return 1;
 }
 
-void	ft_reverseRotateB(Stack **head)
+int	ft_reverseRotateB(Stack **head)
 {
 	Stack *newNode;
 	int temp = ft_lstlast(*head)->data;
@@ -212,12 +293,27 @@ void	ft_reverseRotateB(Stack **head)
 	removeLastNode(*head);
 	*head = newNode;
 	printf("rrb\n");
+	return 1;
 }
 
-void	ft_reverseRotate2Stack(Stack **stackA, Stack **stackB)
+int	ft_reverseRotate2Stack(Stack **stackA, Stack **stackB)
 {
-	ft_reverseRotateA(stackA);
-	ft_reverseRotateB(stackB);
+	// stackA
+	Stack *newNode;
+	int temp = ft_lstlast(*stackA)->data;
+	newNode = createNode(temp);
+	newNode->next = *stackA;
+	removeLastNode(*stackA);
+	*stackA = newNode;
+
+	// stackB
+	temp = ft_lstlast(*stackB)->data;
+	newNode = createNode(temp);
+	newNode->next = *stackB;
+	removeLastNode(*stackB);
+	*stackB = newNode;
+	printf("rrr\n");
+	return 1;
 }
 
 /*================== Main ==================*/

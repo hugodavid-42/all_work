@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:57:43 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/04 16:32:12 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/05 17:01:27 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,49 +24,51 @@ typedef struct stack
 
 
 /* Sorting algorithms */
-void	selectionSort(Stack **stackA, Stack **stackB, int len);
-void	bubbleSort(Stack **stackA, Stack **stackB, int len);
-void	sort3Number(Stack **stackA);
-void    sort5Number(Stack **stackA, Stack **stackB);
-void	insertionSort(Stack **stackA, Stack **stackB);
+int insertionSort(Stack **stackA, Stack **stackB);
+
+/* Shuffle algo */
+void randomize ( int arr[], int n );
 
 /* Utils */
+int	findMax(Stack *stackA);
+int	findMin(Stack *stackA);
+int	locateMin(Stack *stackA);
 
 // sa && sb
 // Swap the first two elements at the top of stack.
 // Do nothing if there is only one or no elements.
-void	ft_swapA(Stack **head);
-void	ft_swapB(Stack **head);
+int	ft_swapA(Stack **head);
+int	ft_swapB(Stack **head);
 
 // ss
 // sa and sb at the same time.
-void	ft_swap2Stack(Stack **stackA, Stack **stackB);
+int	ft_swap2Stack(Stack **stackA, Stack **stackB);
 
 // pa && pb
 // Take the first element at the top of a stack and put it at the top of the other.
 // Do nothing if b is empty.
-void ft_pushAndPopA(Stack **stackA, Stack **stackB);
-void ft_pushAndPopB(Stack **stackA, Stack **stackB);
+int ft_pushAndPopA(Stack **stackA, Stack **stackB);
+int ft_pushAndPopB(Stack **stackA, Stack **stackB);
 
 // ra && rb
 // Shift up all elements of a stack by one.
 // The first element becomes the last one.
-void	ft_rotateA(Stack **head);
-void	ft_rotateB(Stack **head);
+int	ft_rotateA(Stack **head);
+int	ft_rotateB(Stack **head);
 
 // rr
 // ra and rb at the same time.
-void	ft_rotate2Stack(Stack **stackA, Stack **stackB);
+int	ft_rotate2Stack(Stack **stackA, Stack **stackB);
 
 // rra && rrb
 // Shift down all elements of a stack by one.
 // The last element becomes the first one.
-void	ft_reverseRotateB(Stack **head);
-void	ft_reverseRotateA(Stack **head);
+int	ft_reverseRotateB(Stack **head);
+int	ft_reverseRotateA(Stack **head);
 
 // rrr
 // rra and rrb at the same time.
-void	ft_reverseRotate2Stack(Stack **stackA, Stack **stackB);
+int	ft_reverseRotate2Stack(Stack **stackA, Stack **stackB);
 
 /* Others */
 Stack *createNode(int content);
@@ -74,5 +76,6 @@ void    printStack(Stack *stack);
 Stack	*ft_lstlast(Stack *lst);
 int	ft_lstlen(Stack *head);
 float compute_disorder(Stack *head);
+void push(Stack **head, int i);
 
 #endif

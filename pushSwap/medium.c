@@ -1,54 +1,59 @@
 #include "pushswap.h"
 #include <stdio.h>
 
+/*============ Find moove ==================*/
 
-// void partionning(Stack **stackA, Stack **stackB, int len)
+// int findDoubleMoove(Stack *stackA, Stack *stackB)
 // {
-// 	int part = (len / 4);
-// 	int i = 0;
-// 	while(*stackA)
-// 	{
-// 		while(i < part)
-// 		{
-// 			ft_pushAndPop(&*stackB, &*stackA);
-// 			printf("test\n");
-// 			printStack(*stackA);
-// 			i ++;
-// 		}
-// 		i = 0;
-// 		selectionSort(&*stackB, &*stackA, part);
-// 	}
-// 	selectionSort(&*stackB, &*stackA, len);
+
 // }
+
+int mediumSort(Stack **stackA, Stack **stackB)
+{
+	int halfSize = ft_lstlen(*stackA) / 2;
+	int i = 0;
+	while(i < halfSize)
+	{
+		ft_pushAndPopA(stackB, stackA);
+		i ++;
+	}
+	printStack(*stackA);
+	printStack(*stackB);
+	insertionSort(stackB, stackA);
+	printStack(*stackA);
+
+	return 0;
+
+}
+
+
+
 
 // int main(void)
 // {
+// 	int size = 10;
 // 	Stack *stackB = NULL;
-
-// 	Stack *stackA = createNode(100);
-// 	stackA->next =createNode(40);
-// 	stackA->next->next = createNode(30);
-// 	stackA->next->next->next = createNode(14);
-// 	stackA->next->next->next->next = createNode(5);
-// 	stackA->next->next->next->next->next = createNode(60);
-// 	stackA->next->next->next->next->next->next = createNode(7);
-// 	stackA->next->next->next->next->next->next->next = createNode(6);
-// 	stackA->next->next->next->next->next->next->next->next = createNode(48);
-// 	stackA->next->next->next->next->next->next->next->next->next = createNode(78);
-
+// 	Stack *stackA = NULL;
+// 	int *arr = (int *)malloc(sizeof(int) * size);
+// 	if (arr == NULL)
+// 		return printf("Memory not alloctaed\n");
+// 	int i = 0;
+// 	while(i < size)
+// 	{
+// 		arr[i] = i;
+// 		i ++;
+// 	}
+//     randomize (arr, size);
+// 	i = 0;
+// 	while(i < size)
+// 	{
+// 		push(&stackA, arr[i]);
+// 		i ++;
+// 	}
 // 	printf("Disorder = %f\n", compute_disorder(stackA));
 
-
-// 	int len = ft_lstlen(stackA);
-// 	//printf("%d\n", len);
-// 	// printStack(stackA);
-// 	// printStack(stackB);
-// 	partionning(&stackA, &stackB, len);
-// 	// printStack(stackA);
-// 	// printStack(stackB);
-// 	printf("Disorder = %f\n", compute_disorder(stackB));
-
-
+// 	mediumSort(&stackA, &stackB);
+// 	printf("Disorder = %f\n", compute_disorder(stackA));
 // 	return 0;
 	
 // }

@@ -1,100 +1,44 @@
 #include "pushswap.h"
 #include <stdio.h>
 
-int ft_compare(int data1, int data2)
-{
-    return (data1 - data2);
-}
-
-// void bubbleSort(Stack **begin_list)
+// int ft_compare(int data1, int data2)
 // {
-//     Stack *current;
-//     Stack *next;
-//     int temp;
-
-//     int swap = 1;
-//     while(swap)
-//     {
-//         swap = 0;
-//         current = *begin_list;
-//         while(current->next)
-//         {
-//             next = current->next;
-//             if(ft_compare(current->data, next->data) > 0)
-//             {
-//                 temp = current->data;
-//                 current->data = next->data;
-//                 next->data = temp;
-//                 swap = 1;
-//             }
-//             current = current->next;
-//         }
-//     }
+//     return (data1 - data2);
 // }
 
-
-// void bubbleSort(Stack **stackA, int len)
-// {    
-// 	if (len <= 1) 
-// 		return;
-// 	int i;
-// 	int j;
-// 	i = 0;
-// 	while (i < len)
-// 	{
-//         Stack *current = *stackA;
-// 		j = i + 1;
-// 		while (j < len)
-// 		{
-//             if (current->data > current->next->data) {
-//                 ft_swap(current);
-//             }
-//             current = current->next;
-// 			j ++;
-//         }
-// 		i ++;
-//     }
-// }
-
-// void bubbleSort(Stack **stackA, Stack **stackB, int len)
+// int bubbleSort(Stack **stackA)
 // {
-// 	int i = 0;
+// 	int len = ft_lstlen(*stackA);
+// 	int min;
 
-// 	while(*stackA)
-// 	{
-// 		i = 0;
-// 		while(i < len)
-// 		{
-// 			if((*stackA)->data <= (*stackB)->next->data)
-// 				ft_pushAndPop(&*stackB, &*stackA);
-// 			ft_rotate(stackB);
-// 			i ++;
-// 		}
-// 		len --;
-// 		ft_rotate(stackA);
-// 	}
 // }
 
 
 // int main(void)
 // {
+// 	int size = 10;
 // 	Stack *stackB = NULL;
-
-// 	Stack *stackA = createNode(100);
-// 	stackA->next =createNode(40);
-// 	stackA->next->next = createNode(30);
-// 	stackA->next->next->next = createNode(14);
-// 	stackA->next->next->next->next = createNode(5);
-// 	stackA->next->next->next->next->next = createNode(60);
-
-// 	int len = ft_lstlen(stackA);
+// 	Stack *stackA = NULL;
+// 	int *arr = (int *)malloc(sizeof(int) * size);
+// 	if (arr == NULL)
+// 		return printf("Memory not alloctaed\n");
+// 	int i = 0;
+// 	while(i < size)
+// 	{
+// 		arr[i] = i;
+// 		i ++;
+// 	}
+//     randomize (arr, size);
+// 	i = 0;
+// 	while(i < size)
+// 	{
+// 		push(&stackA, arr[i]);
+// 		i ++;
+// 	}
 // 	printf("Disorder = %f\n", compute_disorder(stackA));
 
-// 	printStack(stackA);
-// 	bubbleSort(&stackA, &stackB, len);
-// 	printStack(stackA);
+// 	mediumSort(&stackA, &stackB);
 // 	printf("Disorder = %f\n", compute_disorder(stackA));
-
-
 // 	return 0;
+	
 // }
