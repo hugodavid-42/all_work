@@ -77,5 +77,6 @@ Stack	*ft_lstlast(Stack *lst);
 int	ft_lstlen(Stack *head);
 float compute_disorder(Stack *head);
 void push(Stack **head, int i);
+void free_stack(Stack **stack);
 
 #endif

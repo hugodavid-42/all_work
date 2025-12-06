@@ -129,3 +129,17 @@ Stack	*removeFirstNode(Stack *head)
 
 	return head;
 }
+
+
+void free_stack(Stack **stack) 
+{
+    Stack *cur = *stack;
+    while (cur) 
+	{
+        Stack *next = cur->next;
+        free(cur);
+        cur = next;
+    }
+    *stack = NULL;
+}
+

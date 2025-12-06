@@ -135,7 +135,8 @@ int main(void)
 	printStack(stackA);
 	//printStack(stackB);
 	printf("Disorder = %f\n", compute_disorder(stackA));
-	free(arr);
+		free(arr);
+	free_stack(&stackA);
 	return 0;
 	
 }
