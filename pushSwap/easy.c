@@ -13,46 +13,6 @@
 #include "pushswap.h"
 #include <stdio.h>
 
-/*=========== Utils ===============*/
-
-int	findMax(Stack *stackA)
-{
-	int max = stackA->data;
-	while(stackA)
-	{
-		if(stackA->data > max)
-			max = stackA->data;
-		stackA = stackA->next;
-	}
-	return max;
-}
-
-int	findMin(Stack *stackA)
-{
-	int min = stackA->data;
-	while(stackA)
-	{
-		if(stackA->data < min)
-			min = stackA->data;
-		stackA = stackA->next;
-	}
-	return min;
-}
-
-int		locateMin(Stack *stackA)
-{
-	int min = findMin(stackA);
-	int i = 0;
-	while (stackA)
-	{
-		if (stackA->data == min)
-			return i;
-		i ++;
-		stackA = stackA->next;
-	}
-	return i;
-}
-
 /*=========== Sorting Algo =================*/
 
 int	sort3Number(Stack **stackA)
@@ -64,25 +24,25 @@ int	sort3Number(Stack **stackA)
 
 	// 2,1,3
 	if (a > b && b < c && a < c)
-		mov += ft_swapA(stackA);
+		mov += sa(stackA);
 	// 3,2,1
 	else if (a > b && b > c && a > c)
 	{
-		mov += ft_swapA(stackA);
-		mov += ft_reverseRotateA(stackA);
+		mov += sa(stackA);
+		mov += rra(stackA);
 	}
 	// 3,1,2
 	else if (a > b && b < c && a > c)
-		mov += ft_rotateA(stackA);
+		mov += ra(stackA);
 	// 1,3,2
 	else if (a < b && b > c && a < c)
 	{
-		mov += ft_swapA(stackA);
-		mov += ft_rotateA(stackA);
+		mov += sa(stackA);
+		mov += ra(stackA);
 	}
 	// 2,3,1
 	else if (a < b && b > c && a > c)
-		mov += ft_reverseRotateA(stackA);
+		mov += rra(stackA);
 	return mov;
 }
 
@@ -93,25 +53,25 @@ int sort5Number(Stack **stackA, Stack **stackB)
 	int min = findMin(*stackA);
 	while((*stackA)->data != min)
 	{
-		mov += ft_rotateA(stackA);
+		mov += ra(stackA);
 	}
-    mov += ft_pushAndPopA(stackB, stackA);
+    mov += pb(stackA, stackB);
 	min = findMin(*stackA);
 	while((*stackA)->data != min)
 	{
-		ft_rotateA(stackA);
+		ra(stackA);
 	}
-    mov += ft_pushAndPopA(stackB, stackA);
+    mov += pb(stackA, stackB);
     mov += sort3Number(stackA);
     if ((*stackB)->data < (*stackB)->next->data) {
-        mov += ft_swapB(stackB);
+        mov += sb(stackB);
     }
     while (*stackB) 
 	{
-			mov += ft_pushAndPopB(stackA, stackB);
+			mov += pa(stackA, stackB);
     }
 	while((*stackA)->data != findMin(*stackA))
-		mov += ft_rotateA(stackA);
+		mov += ra(stackA);
 	return mov;
 }
 
@@ -126,62 +86,56 @@ int insertionSort(Stack **stackA, Stack **stackB)
         if (pos <= len / 2) 
 		{
             while (pos-- > 0)
-                mov += ft_rotateA(stackA);
+                mov += ra(stackA);
         } 
 		else 
 		{
             int k = len - pos;
             while (k-- > 0)
-                mov += ft_reverseRotateA(stackA);
+                mov += rra(stackA);
         }
-        mov += ft_pushAndPopA(stackB, stackA);
+        mov += pb(stackA, stackB);
     }
     while(*stackB)
-		mov += ft_pushAndPopB(stackA, stackB);
+		mov += pa(stackA, stackB);
 	return mov;
 }
 
-void push(Stack **head, int i)
+int main(void)
 {
-	Stack *newNode = createNode(i);
-	newNode->next = *head;
-	*head = newNode;
-}
+	int size = 5;
+	Stack *stackB = NULL;
+	Stack *stackA = NULL;
+	int *arr = (int *)malloc(sizeof(int) * size);
+	if (arr == NULL)
+		return printf("Memory not alloctaed\n");
+	int i = 0;
+	while(i < size)
+	{
+		arr[i] = i;
+		i ++;
+	}
+    randomize (arr, size);
+	i = 0;
+	while(i < size)
+	{
+		push(&stackA, arr[i]);
+		i ++;
+	}
+	printf("Disorder = %f\n", compute_disorder(stackA));
 
-// int main(void)
-// {
-// 	int size = 100;
-// 	Stack *stackB = NULL;
-// 	Stack *stackA = NULL;
-// 	int *arr = (int *)malloc(sizeof(int) * size);
-// 	if (arr == NULL)
-// 		return printf("Memory not alloctaed\n");
-// 	int i = 0;
-// 	while(i < size)
-// 	{
-// 		arr[i] = i;
-// 		i ++;
-// 	}
-//     randomize (arr, size);
-// 	i = 0;
-// 	while(i < size)
-// 	{
-// 		push(&stackA, arr[i]);
-// 		i ++;
-// 	}
-// 	printf("Disorder = %f\n", compute_disorder(stackA));
-
-// 	printStack(stackA);
-// 	if(size == 3)
-// 		printf("Total moove : %d\n", sort3Number(&stackA));
-// 	else if (size == 5)
-// 		printf("Total moove : %d\n", sort5Number(&stackA, &stackB));
-// 	else 
-// 		printf("Total moove : %d\n", insertionSort(&stackA, &stackB));
-// 	printf("===========================================\n");
-// 	printStack(stackA);
-// 	//printStack(stackB);
-// 	printf("Disorder = %f\n", compute_disorder(stackA));
-// 	return 0;
+	printStack(stackA);
+	if(size == 3)
+		printf("Total moove : %d\n", sort3Number(&stackA));
+	else if (size == 5)
+		printf("Total moove : %d\n", sort5Number(&stackA, &stackB));
+	else 
+		printf("Total moove : %d\n", insertionSort(&stackA, &stackB));
+	printf("===========================================\n");
+	printStack(stackA);
+	//printStack(stackB);
+	printf("Disorder = %f\n", compute_disorder(stackA));
+	free(arr);
+	return 0;
 	
-// }
+}

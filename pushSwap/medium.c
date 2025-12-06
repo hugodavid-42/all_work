@@ -8,23 +8,10 @@
 
 // }
 
-int mediumSort(Stack **stackA, Stack **stackB)
-{
-	int halfSize = ft_lstlen(*stackA) / 2;
-	int i = 0;
-	while(i < halfSize)
-	{
-		ft_pushAndPopA(stackB, stackA);
-		i ++;
-	}
-	printStack(*stackA);
-	printStack(*stackB);
-	insertionSort(stackB, stackA);
-	printStack(*stackA);
+// int mediumSort(Stack **stackA, Stack **stackB)
+// {
 
-	return 0;
-
-}
+//}
 
 
 

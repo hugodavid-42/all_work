@@ -37,38 +37,38 @@ int	locateMin(Stack *stackA);
 // sa && sb
 // Swap the first two elements at the top of stack.
 // Do nothing if there is only one or no elements.
-int	ft_swapA(Stack **head);
-int	ft_swapB(Stack **head);
+int	sa(Stack **a);
+int sb(Stack **b);
 
 // ss
 // sa and sb at the same time.
-int	ft_swap2Stack(Stack **stackA, Stack **stackB);
+int	ss(Stack **stackA, Stack **stackB);
 
 // pa && pb
 // Take the first element at the top of a stack and put it at the top of the other.
 // Do nothing if b is empty.
-int ft_pushAndPopA(Stack **stackA, Stack **stackB);
-int ft_pushAndPopB(Stack **stackA, Stack **stackB);
+int pa(Stack **stackA, Stack **stackB);
+int pb(Stack **stackA, Stack **stackB);
 
 // ra && rb
 // Shift up all elements of a stack by one.
 // The first element becomes the last one.
-int	ft_rotateA(Stack **head);
-int	ft_rotateB(Stack **head);
+int	ra(Stack **a);
+int	rb(Stack **b);
 
 // rr
 // ra and rb at the same time.
-int	ft_rotate2Stack(Stack **stackA, Stack **stackB);
+int	rr(Stack **stackA, Stack **stackB);
 
 // rra && rrb
 // Shift down all elements of a stack by one.
 // The last element becomes the first one.
-int	ft_reverseRotateB(Stack **head);
-int	ft_reverseRotateA(Stack **head);
+int	rra(Stack **a);
+int	rrb(Stack **b);
 
 // rrr
 // rra and rrb at the same time.
-int	ft_reverseRotate2Stack(Stack **stackA, Stack **stackB);
+int	rrr(Stack **stackA, Stack **stackB);
 
 /* Others */
 Stack *createNode(int content);
