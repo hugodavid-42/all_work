@@ -64,11 +64,11 @@ int sizeChunk(Stack *stackA)
 // }
 
 
-bool findClosestPos(Stack **stackA, int min, int max)
+int findClosestPos(Stack **stackA, int min, int max)
 {
-    if (!stackA || !*stackA) return false;
-
-    // Parcours avec un pointeur temporaire
+    int mov = 0;
+    if (!stackA || !*stackA) 
+        return 0;
     Stack *tmp = *stackA;
     int i = 0;
 
@@ -78,33 +78,30 @@ bool findClosestPos(Stack **stackA, int min, int max)
     }
 
     if (!tmp) {
-        // Aucun élément dans le range
-        return false;
+        return 0;
     }
-
-    // Choisir le sens minimal de rotation
     int len = ft_lstlen(*stackA);
     if (i <= len / 2) {
         while (i-- > 0) 
-            ra(stackA);         // avance i fois
+            mov += ra(stackA);
     } 
     else 
     {
-        int steps = len - i;                 // recule len - i fois
+        int steps = len - i;
         while (steps-- > 0) 
-            rra(stackA);
+            mov += rra(stackA);
     }
+    return mov;
 
-    return true;
 }
 
-
-void    chunkSort(Stack **stackA, Stack **stackB)
+int    pushA(Stack **stackA, Stack **stackB)
 {
     int chunk = sizeChunk(*stackA);
     int i = 0;
     int min = 0;
     int max = min + chunk;
+    int mov = 0;
 
     while(*stackA)
     {
@@ -114,18 +111,60 @@ void    chunkSort(Stack **stackA, Stack **stackB)
             findClosestPos(stackA, min, max);
             if((*stackA)->index >= min && (*stackA)->index < max)
             {
-                pb(stackA, stackB);
+                mov += pb(stackA, stackB);
                 i ++;  
             }
         }
         min = max;
         max = min + chunk;
     }
+    return mov;
+}
+
+int posOfMax(Stack *stackB, int max)
+{
+    if (!stackB)
+        return -1;
+    int i = 0;
+    Stack *tmp = stackB;
+    if (!tmp)
+        return -1;
+
+    while(tmp->index != max && tmp)
+    {
+        i ++;
+        tmp = tmp->next;
+    }
+    return i;
+}
+
+int   pushBackB(Stack **stackA, Stack **stackB)
+{
+    int mov = 0;
+    while(*stackB)
+    {
+        int max = ft_lstlen(*stackB) - 1;
+        if((*stackB)->index == max)
+            mov += pa(stackA, stackB);
+        else if(posOfMax(*stackB, max) <= max / 2)
+            mov += rb(stackB);
+        else
+            mov += rrb(stackB);
+    }
+    return mov;
+}
+
+int chunkSort(Stack **stackA, Stack **stackB)
+{
+    int mov = 0;
+    mov += pushA(stackA, stackB);
+    mov += pushBackB(stackA, stackB);
+    return mov;
 }
 
 int main(void)
 {
-	int size = 22;
+	int size = 25;
 	Stack *stackB = NULL;
 	Stack *stackA = NULL;
 	int *arr = (int *)malloc(sizeof(int) * size);
@@ -144,18 +183,18 @@ int main(void)
 		push(&stackA, arr[i]);
 		i ++;
 	}
-    i = 0;
-    printStack(stackA);
-	int *nbr = buildArray(stackA);
-    while(i < size)
-    {
-        printf("%d --> ", nbr[i]);
-        i ++;
-    }
-    printf("\n%d\n", sizeChunk(stackA));
-    chunkSort(&stackA, &stackB);
-    printStack(stackA);
-    printStack(stackB);
-	return 0; 
+	printf("Disorder = %f\n", compute_disorder(stackA));
+
+	printStack(stackA);
+    printf("Total moove : %d\n", chunkSort(&stackA, &stackB));
+
+    printf("===========================================\n");
+	printStack(stackA);
+	//printStack(stackB);
+	printf("Disorder = %f\n", compute_disorder(stackA));
+		free(arr);
+	free_stack(&stackA);
+	return 0;
+	
 }
 
