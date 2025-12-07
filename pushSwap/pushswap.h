@@ -20,6 +20,7 @@ typedef struct stack
 {
     struct stack   *next;
     int				data;
+    int             index;
 }   Stack;
 
 

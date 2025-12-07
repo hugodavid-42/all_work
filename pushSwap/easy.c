@@ -101,42 +101,42 @@ int insertionSort(Stack **stackA, Stack **stackB)
 	return mov;
 }
 
-int main(void)
-{
-	int size = 5;
-	Stack *stackB = NULL;
-	Stack *stackA = NULL;
-	int *arr = (int *)malloc(sizeof(int) * size);
-	if (arr == NULL)
-		return printf("Memory not alloctaed\n");
-	int i = 0;
-	while(i < size)
-	{
-		arr[i] = i;
-		i ++;
-	}
-    randomize (arr, size);
-	i = 0;
-	while(i < size)
-	{
-		push(&stackA, arr[i]);
-		i ++;
-	}
-	printf("Disorder = %f\n", compute_disorder(stackA));
+// int main(void)
+// {
+// 	int size = 5;
+// 	Stack *stackB = NULL;
+// 	Stack *stackA = NULL;
+// 	int *arr = (int *)malloc(sizeof(int) * size);
+// 	if (arr == NULL)
+// 		return printf("Memory not alloctaed\n");
+// 	int i = 0;
+// 	while(i < size)
+// 	{
+// 		arr[i] = i;
+// 		i ++;
+// 	}
+//     randomize (arr, size);
+// 	i = 0;
+// 	while(i < size)
+// 	{
+// 		push(&stackA, arr[i]);
+// 		i ++;
+// 	}
+// 	printf("Disorder = %f\n", compute_disorder(stackA));
 
-	printStack(stackA);
-	if(size == 3)
-		printf("Total moove : %d\n", sort3Number(&stackA));
-	else if (size == 5)
-		printf("Total moove : %d\n", sort5Number(&stackA, &stackB));
-	else 
-		printf("Total moove : %d\n", insertionSort(&stackA, &stackB));
-	printf("===========================================\n");
-	printStack(stackA);
-	//printStack(stackB);
-	printf("Disorder = %f\n", compute_disorder(stackA));
-		free(arr);
-	free_stack(&stackA);
-	return 0;
+// 	printStack(stackA);
+// 	if(size == 3)
+// 		printf("Total moove : %d\n", sort3Number(&stackA));
+// 	else if (size == 5)
+// 		printf("Total moove : %d\n", sort5Number(&stackA, &stackB));
+// 	else 
+// 		printf("Total moove : %d\n", insertionSort(&stackA, &stackB));
+// 	printf("===========================================\n");
+// 	printStack(stackA);
+// 	//printStack(stackB);
+// 	printf("Disorder = %f\n", compute_disorder(stackA));
+// 		free(arr);
+// 	free_stack(&stackA);
+// 	return 0;
 	
-}
+// }
