@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:48:41 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/08 10:15:02 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/08 13:47:25 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,63 +39,58 @@ static void	swap(Stack **s)
 	next->data = temp;
 }
 
-int	sa(Stack **a)
+void	sa(Stack **a)
 {
 	if (!a || !*a || !(*a)->next)
-		return 0;
+		return ;
 	swap(a);
 	printf("sa\n");
-	return 1;
 }
 
-int	sb(Stack **b)
+void	sb(Stack **b)
 {
 	if (!b || !*b || !(*b)->next)
-		return 0;
+		return ;
 	swap(b);
 	printf("sb\n");
-	return 1;
 }
 
 /*================== ss ==================*/
 
 
-int    ss(Stack **a, Stack **b)
+void    ss(Stack **a, Stack **b)
 {
 	if (!a || !*a || !(*a)->next || !b || !*b || !(*b)->next)
-		return 0;
+		return ;
 	swap(a);
 	swap(b);
     printf("ss\n");
-	return 1;
 }
 
 
 /*================== pa && pb ==================*/
 
 
-int    pa(Stack **stackA, Stack **stackB)
+void    pa(Stack **stackA, Stack **stackB)
 {
     if (!stackB || !*stackB) 
-		return 0;
+		return ;
     Stack *x = *stackB;
     *stackB = x->next;
     x->next = *stackA;
     *stackA = x;
     printf("pa\n");
-	return 1;
 }
 
-int    pb(Stack **stackA, Stack **stackB) 
+void    pb(Stack **stackA, Stack **stackB) 
 {
     if (!stackA || !*stackA)
-		return 0;
+		return ;
     Stack *x = *stackA;
     *stackA = x->next;
     x->next = *stackB;
     *stackB = x;
     printf("pb\n");
-	return 1;
 }
 
 
@@ -116,33 +111,30 @@ static void rotate(Stack **s)
 }
 
 
-int    ra(Stack **a)
+void    ra(Stack **a)
 {
     if (!a || !*a || !(*a)->next) 
-		return 0;
+		return ;
 	rotate(a);
     printf("ra\n");
-	return 1;
 }
 
 
-int    rb(Stack **b)
+void    rb(Stack **b)
 {
     if (!b || !*b || !(*b)->next) 
-		return 0;
+		return ;
 	rotate(b);
     printf("rb\n");
-	return 1;
 }
 
-int	rr(Stack **a, Stack **b)
+void	rr(Stack **a, Stack **b)
 {
     if (!a || !*a || !(*a)->next || !b || !*b || !(*b)->next) 
-		return 0;
+		return ;
 	rotate(a);
 	rotate(b);
 	printf("rr\n");
-	return 1;
 }
 
 /*============= rra & rrb && rrr ===============*/
@@ -165,32 +157,28 @@ static void rev_rotate(Stack **s)
 }
 
 
-int    rra(Stack **a)
+void    rra(Stack **a)
 {
     if (!a || !*a || !(*a)->next) 
-		return 0;
+		return ;
 	rev_rotate(a);
     printf("rra\n");
-	return 1;
 }
 
 
-int    rrb(Stack **b)
+void    rrb(Stack **b)
 {
     if (!b || !*b || !(*b)->next) 
-		return 0;
+		return ;
 	rev_rotate(b);
     printf("rrb\n");
-	return 1;
 }
 
-int	rrr(Stack **a, Stack **b)
+void	rrr(Stack **a, Stack **b)
 {
 	if (!a || !*a || !(*a)->next || !b || !*b || !(*b)->next)
-		return 0;
-	// stackB
+		return ;
 	rev_rotate(a);
 	rev_rotate(b);
 	printf("rrr\n");
-	return 1;
 }

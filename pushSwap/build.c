@@ -84,6 +84,35 @@ int		locateMin(Stack *stackA)
 	return i;
 }
 
+/*============== Normalize =================*/
+
+int    *buildArray(Stack *stackA)
+{
+    int n = ft_lstlen(stackA);
+    Stack *current;
+    Stack *dataToCompare = stackA;
+    int i = 0;
+    int index;
+    int *arr = malloc(sizeof(int) * n);
+
+    while(i < n)
+    {
+        index = 0;
+        current = stackA;
+        while(current)
+        {
+            if(dataToCompare->data > current->data)
+                index ++;
+            current = current->next;
+        }
+        arr[i] = index;
+        dataToCompare->index = index;
+        dataToCompare = dataToCompare->next;
+        i ++;
+    }
+    return(arr);
+}
+
 
 /*================== Find Last ==================*/
 

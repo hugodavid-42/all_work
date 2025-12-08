@@ -3,33 +3,6 @@
 #include "pushswap.h"
 #include <stdio.h>
 
-int    *buildArray(Stack *stackA)
-{
-    int n = ft_lstlen(stackA);
-    Stack *current;
-    Stack *dataToCompare = stackA;
-    int i = 0;
-    int index;
-    int *arr = malloc(sizeof(int) * n);
-
-    while(i < n)
-    {
-        index = 0;
-        current = stackA;
-        while(current)
-        {
-            if(dataToCompare->data > current->data)
-                index ++;
-            current = current->next;
-        }
-        arr[i] = index;
-        dataToCompare->index = index;
-        dataToCompare = dataToCompare->next;
-        i ++;
-    }
-    return(arr);
-}
-
 int sizeChunk(Stack *stackA)
 {
 	if (stackA == 0)
@@ -41,35 +14,9 @@ int sizeChunk(Stack *stackA)
     return (int)(len / chunks);
 }
 
-// void findClosestPos(Stack **stackA, int min, int max)
-// {
-//     int i = 0;
-//     int len = ft_lstlen(*stackA);
-// 	Stack *tmp = *stackA;
-
-//     while(tmp)
-//     {
-//         if (tmp->index >= min && tmp->index < max)
-//             break ;
-//         i ++;
-//         tmp = tmp->next;
-//     }
-//     if (i > len / 2)
-//     {
-//         while(i-- > 0)
-//             rra(stackA);
-//     }
-//     else
-//     {
-//         while(i-- > 0)
-//             ra(stackA);
-//     }
-// }
-
-
-int findClosestPos(Stack **stackA, int min, int max)
+int	findClosestPos(Stack **stackA, int min, int max)
 {
-    int mov = 0;
+	int move = 0;
     if (!stackA || !*stackA) 
         return 0;
     Stack *tmp = *stackA;
@@ -85,25 +32,30 @@ int findClosestPos(Stack **stackA, int min, int max)
     }
     int len = ft_lstlen(*stackA);
     if (i <= len / 2) {
-        while (i-- > 0) 
-            mov += ra(stackA);
+        while (i-- > 0)
+		{
+            ra(stackA);
+			move ++;
+		}
     } 
     else 
     {
         int steps = len - i;
-        while (steps-- > 0) 
-            mov += rra(stackA);
+        while (steps-- > 0)
+		{ 
+            rra(stackA);
+			move ++;
+		}
     }
-    return mov;
+	return move;
 }
 
-int    pushA(Stack **stackA, Stack **stackB)
+void    pushA(Stack **stackA, Stack **stackB)
 {
     int chunk = sizeChunk(*stackA);
     int i = 0;
     int min = 0;
     int max = chunk;
-    int mov = 0;
 
     while(*stackA)
     {
@@ -113,14 +65,14 @@ int    pushA(Stack **stackA, Stack **stackB)
 			int pos = findClosestPos(stackA, min, max);
             if(pos == 0)
             {
-                mov += pb(stackA, stackB);
+                pb(stackA, stackB);
 				i ++;
             }
         }
         min = max;
         max += chunk;
     }
-    return mov;
+
 }
 
 int posOfMax(Stack *stackB, int max)
@@ -140,35 +92,34 @@ int posOfMax(Stack *stackB, int max)
     return i;
 }
 
-int   pushBackB(Stack **stackA, Stack **stackB)
+void   pushBackB(Stack **stackA, Stack **stackB)
 {
-    int mov = 0;
+	if (!(*stackB))
+		return;
     while(*stackB)
     {
         int max = ft_lstlen(*stackB) - 1;
         if((*stackB)->index == max)
-            mov += pa(stackA, stackB);
+            pa(stackA, stackB);
         else if(posOfMax(*stackB, max) <= max / 2)
-            mov += rb(stackB);
+            rb(stackB);
         else
-            mov += rrb(stackB);
+            rrb(stackB);
     }
-    return mov;
 }
 
-int chunkSort(Stack **stackA, Stack **stackB)
+void chunkSort(Stack **stackA, Stack **stackB)
 {
-    int mov = 0;
-
+	if (!(*stackA) || !(*stackA)->next)
+		return;
 	buildArray(*stackA);
-    mov += pushA(stackA, stackB);
-    mov += pushBackB(stackA, stackB);
-    return mov;
+    pushA(stackA, stackB);
+	pushBackB(stackA, stackB);
 }
 
 // int main(void)
 // {
-// 	int size = 500;
+// 	int size = 100;
 // 	Stack *stackB = NULL;
 // 	Stack *stackA = NULL;
 // 	int *arr = (int *)malloc(sizeof(int) * size);
@@ -200,7 +151,7 @@ int chunkSort(Stack **stackA, Stack **stackB)
 // 	// }
 // 	printStack(stackA);
 
-//     printf("\nTotal moove : %i\n", chunkSort(&stackA, &stackB));
+//     chunkSort(&stackA, &stackB);
 // 	// printf("\nTotal moove : %i\n", insertionSort(&stackA, &stackB));
 
 //     printf("\n===========================================\n");

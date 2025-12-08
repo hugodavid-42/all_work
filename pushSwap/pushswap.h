@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:57:43 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/08 12:22:08 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/08 14:09:59 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ typedef struct stack
 
 
 /* Sorting algorithms */
-int sort5Number(Stack **stackA, Stack **stackB);
-int insertionSort(Stack **stackA, Stack **stackB);
-int chunkSort(Stack **stackA, Stack **stackB);
+void	sort3Number(Stack **stackA);
+void sort5Number(Stack **stackA, Stack **stackB);
+void insertionSort(Stack **stackA, Stack **stackB);
+void chunkSort(Stack **stackA, Stack **stackB);
 
 /* Shuffle algo */
 void randomize ( int arr[], int n );
@@ -36,46 +37,47 @@ void randomize ( int arr[], int n );
 int	findMax(Stack *stackA);
 int	findMin(Stack *stackA);
 int	locateMin(Stack *stackA);
+int    *buildArray(Stack *stackA);
 
 // sa && sb
 // Swap the first two elements at the top of stack.
 // Do nothing if there is only one or no elements.
-int	sa(Stack **a);
-int sb(Stack **b);
+void	sa(Stack **a);
+void sb(Stack **b);
 
 // ss
 // sa and sb at the same time.
-int	ss(Stack **stackA, Stack **stackB);
+void	ss(Stack **stackA, Stack **stackB);
 
 // pa && pb
 // Take the first element at the top of a stack and put it at the top of the other.
 // Do nothing if b is empty.
 
 // b -> a
-int pa(Stack **stackA, Stack **stackB);
+void pa(Stack **stackA, Stack **stackB);
 
 // a -> b
-int pb(Stack **stackA, Stack **stackB);
+void pb(Stack **stackA, Stack **stackB);
 
 // ra && rb
 // Shift up all elements of a stack by one.
 // The first element becomes the last one.
-int	ra(Stack **a);
-int	rb(Stack **b);
+void	ra(Stack **a);
+void	rb(Stack **b);
 
 // rr
 // ra and rb at the same time.
-int	rr(Stack **stackA, Stack **stackB);
+void	rr(Stack **stackA, Stack **stackB);
 
 // rra && rrb
 // Shift down all elements of a stack by one.
 // The last element becomes the first one.
-int	rra(Stack **a);
-int	rrb(Stack **b);
+void	rra(Stack **a);
+void	rrb(Stack **b);
 
 // rrr
 // rra and rrb at the same time.
-int	rrr(Stack **stackA, Stack **stackB);
+void	rrr(Stack **stackA, Stack **stackB);
 
 /* Others */
 Stack *createNode(int content);
