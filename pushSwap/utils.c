@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:48:41 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/05 16:59:58 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/08 10:15:02 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int    ss(Stack **a, Stack **b)
 /*================== pa && pb ==================*/
 
 
-int    pa(Stack **stackA, Stack **stackB) // B -> A
+int    pa(Stack **stackA, Stack **stackB)
 {
     if (!stackB || !*stackB) 
 		return 0;
@@ -86,7 +86,7 @@ int    pa(Stack **stackA, Stack **stackB) // B -> A
 	return 1;
 }
 
-int    pb(Stack **stackA, Stack **stackB) // A -> B
+int    pb(Stack **stackA, Stack **stackB) 
 {
     if (!stackA || !*stackA)
 		return 0;
@@ -110,9 +110,9 @@ static void rotate(Stack **s)
     Stack *last = *s;
     while (last->next) 
 		last = last->next;
-    *s = first->next;       // nouveau top
+    *s = first->next;
     first->next = NULL;
-    last->next = first;     // ancien top devient dernier
+    last->next = first;
 }
 
 

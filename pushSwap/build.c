@@ -17,7 +17,7 @@ void    printStack(Stack *stack)
 {
     while(stack)
     {
-        printf("%d --> ", stack->data);
+        printf("%d -> ", stack->data);
         stack = stack->next;
     }
     printf("NULL");

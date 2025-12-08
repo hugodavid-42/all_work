@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:57:43 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/05 17:01:27 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/08 10:14:31 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int	ss(Stack **stackA, Stack **stackB);
 // pa && pb
 // Take the first element at the top of a stack and put it at the top of the other.
 // Do nothing if b is empty.
+
+// b -> a
 int pa(Stack **stackA, Stack **stackB);
+
+// a -> b
 int pb(Stack **stackA, Stack **stackB);
 
 // ra && rb
