@@ -166,50 +166,50 @@ int chunkSort(Stack **stackA, Stack **stackB)
     return mov;
 }
 
-int main(void)
-{
-	int size = 500;
-	Stack *stackB = NULL;
-	Stack *stackA = NULL;
-	int *arr = (int *)malloc(sizeof(int) * size);
-	if (arr == NULL)
-		return printf("Memory not alloctaed\n");
-	int i = 0;
-	while(i < size)
-	{
-		arr[i] = i;
-		i ++;
-	}
-    randomize (arr, size);
-	i = 0;
-	while(i < size)
-	{
-		push(&stackA, arr[i]);
-		i ++;
-	}
-	printf("Disorder = %f\n", compute_disorder(stackA));
-	printf("%d\n", sizeChunk(stackA));
-	printStack(stackA);
-	i = 0;
-	Stack *temp = stackA;
-	while(i < size)
-	{
-		printf("%d --> ", temp->index);
-		temp = temp->next;
-		i ++;
-	}
-	printStack(stackA);
+// int main(void)
+// {
+// 	int size = 500;
+// 	Stack *stackB = NULL;
+// 	Stack *stackA = NULL;
+// 	int *arr = (int *)malloc(sizeof(int) * size);
+// 	if (arr == NULL)
+// 		return printf("Memory not alloctaed\n");
+// 	int i = 0;
+// 	while(i < size)
+// 	{
+// 		arr[i] = i;
+// 		i ++;
+// 	}
+//     randomize (arr, size);
+// 	i = 0;
+// 	while(i < size)
+// 	{
+// 		push(&stackA, arr[i]);
+// 		i ++;
+// 	}
+// 	printf("Disorder = %f\n", compute_disorder(stackA));
+// 	printf("%d\n", sizeChunk(stackA));
+// 	//printStack(stackA);
+// 	//i = 0;
+// 	// Stack *temp = stackA;
+// 	// while(i < size)
+// 	// {
+// 	// 	printf("%d --> ", temp->index);
+// 	// 	temp = temp->next;
+// 	// 	i ++;
+// 	// }
+// 	printStack(stackA);
 
-    printf("\nTotal moove : %i\n", chunkSort(&stackA, &stackB));
-	//printf("\nTotal moove : %i\n", insertionSort(&stackA, &stackB));
+//     printf("\nTotal moove : %i\n", chunkSort(&stackA, &stackB));
+// 	// printf("\nTotal moove : %i\n", insertionSort(&stackA, &stackB));
 
-    printf("\n===========================================\n");
-	printStack(stackB);
-	printStack(stackA);
-	printf("Disorder = %f\n", compute_disorder(stackA));
-		free(arr);
-	free_stack(&stackA);
-	return 0;
+//     printf("\n===========================================\n");
+// 	printStack(stackB);
+// 	printStack(stackA);
+// 	printf("Disorder = %f\n", compute_disorder(stackA));
+// 		free(arr);
+// 	free_stack(&stackA);
+// 	return 0;
 	
-}
+// }
 

@@ -6,7 +6,7 @@
 /*   By: hdavid <hdavid@learner.42.tech>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:57:43 by hdavid            #+#    #+#             */
-/*   Updated: 2025/12/08 10:14:31 by hdavid           ###   ########.fr       */
+/*   Updated: 2025/12/08 12:22:08 by hdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct stack
 
 
 /* Sorting algorithms */
+int sort5Number(Stack **stackA, Stack **stackB);
 int insertionSort(Stack **stackA, Stack **stackB);
+int chunkSort(Stack **stackA, Stack **stackB);
 
 /* Shuffle algo */
 void randomize ( int arr[], int n );
